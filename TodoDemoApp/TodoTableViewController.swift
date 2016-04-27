@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TodoTableViewController: UITableViewController {
+class TodoTableViewController: UITableViewController, TodoDelegate {
     
     let cellId = "TodoCell"
     var model: [TodoItem] = Array()
@@ -24,18 +24,21 @@ class TodoTableViewController: UITableViewController {
     
     @IBOutlet weak var table: UITableView!
     
-    override func viewDidAppear(animated: Bool) {
-        
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
         table.rowHeight = UITableViewAutomaticDimension
         table.dataSource = self
         table.delegate = self
         table.allowsSelectionDuringEditing = false
         table.allowsMultipleSelection = false
-
+        
         model.append(TodoItem(title: "Buy milk", dueDate: nil, color: UIColor.greenColor()))
         model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), color: UIColor.yellowColor()))
         model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), color: UIColor.blackColor()))
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        table.reloadData()
     }
     
     func expireRow(row: Int) {
@@ -51,6 +54,11 @@ class TodoTableViewController: UITableViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let addTodoVC = segue.destinationViewController as? AddTodoViewController {
+            addTodoVC.delegate = self
+        }
+    }
     
     // MARK: UITableViewDataSource
     
@@ -91,15 +99,15 @@ class TodoTableViewController: UITableViewController {
         
         let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done", handler:{action, indexpath in
             self.expireRow(indexPath.row)
-            tableView.editing = false
-            tableView.reloadData()
+            self.table.editing = false
+            self.table.reloadData()
         });
         moreRowAction.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.3922, alpha: 1.0);
         
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             self.deleteRow(indexPath.row, section: indexPath.section)
-            tableView.editing = false
-            tableView.reloadData()
+            self.table.editing = false
+            self.table.reloadData()
         });
     
         return indexPath.section == 0 ? [deleteRowAction, moreRowAction] : [deleteRowAction];
@@ -108,4 +116,15 @@ class TodoTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         tableView.reloadData()
     }
+    
+    // MARK: TodoDelegate
+    
+    func addItem(item: TodoItem) {
+        model.append(item)
+        table.reloadData()
+    }
+}
+
+protocol TodoDelegate: class {
+    func addItem(item: TodoItem)
 }
