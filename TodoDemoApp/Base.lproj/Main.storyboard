@@ -68,7 +68,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="DFh-Op-k5e"/>
+                    <navigationItem key="navigationItem" title="Todo Items" id="DFh-Op-k5e"/>
                     <connections>
                         <outlet property="table" destination="Et8-b6-QiK" id="xHQ-kf-mIH"/>
                     </connections>
