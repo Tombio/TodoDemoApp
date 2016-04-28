@@ -29,6 +29,7 @@ class TodoTableViewController: UITableViewController {
         table.dataSource = self
         table.delegate = self
         table.allowsSelectionDuringEditing = false
+        table.allowsSelection = false
         table.allowsMultipleSelection = false
         
         model.append(TodoItem(title: "Buy milk", dueDate: nil, color: UIColor(40, 209, 22, 100)))
@@ -84,4 +85,5 @@ class TodoTableViewController: UITableViewController {
         cell.colorLabel.backgroundColor = item.color
         return cell
     }
+    
 }
