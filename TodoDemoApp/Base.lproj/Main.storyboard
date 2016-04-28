@@ -113,6 +113,9 @@
                                 <rect key="frame" x="284.5" y="358" width="31" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addItem:" destination="R5o-fv-av3" eventType="touchUpInside" id="JEv-jh-lNs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,7 +131,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="3zn-uP-NQ4" id="Har-Vy-JQH"/>
                         <outlet property="datePicker" destination="PXJ-eR-eqC" id="1E2-eT-AEv"/>
                         <outlet property="textField" destination="5OS-zI-SMJ" id="uD2-l8-AxQ"/>
                     </connections>

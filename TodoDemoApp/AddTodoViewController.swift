@@ -15,7 +15,4 @@ class AddTodoViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var textField: UITextField!
     
-    
-    
 }
-
