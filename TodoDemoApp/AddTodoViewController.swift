@@ -10,18 +10,12 @@ import Foundation
 import UIKit
 
 class AddTodoViewController: UIViewController {
-
-    weak var delegate: TodoDelegate?
     
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var textField: UITextField!
     
-    @IBAction func toggleBoolean(sender: AnyObject) {
-        if let text = self.textField.text {
-            delegate?.addItem(TodoItem(title: text, dueDate: datePicker.date, color: UIColor.magentaColor()))
-            navigationController?.popViewControllerAnimated(true)
-        }
-    }
+    
+    
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TodoTableViewController: UITableViewController, TodoDelegate {
+class TodoTableViewController: UITableViewController {
     
     let cellId = "TodoCell"
     var model: [TodoItem] = Array()
@@ -54,13 +54,7 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let addTodoVC = segue.destinationViewController as? AddTodoViewController {
-            addTodoVC.delegate = self
-        }
-    }
-    
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -90,41 +84,4 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         cell.colorLabel.backgroundColor = item.color
         return cell
     }
-    
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        
-        let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done", handler:{action, indexpath in
-            self.expireRow(indexPath.row)
-            self.table.editing = false
-            self.table.reloadData()
-        });
-        moreRowAction.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.3922, alpha: 1.0);
-        
-        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            self.deleteRow(indexPath.row, section: indexPath.section)
-            self.table.editing = false
-            self.table.reloadData()
-        });
-    
-        return indexPath.section == 0 ? [deleteRowAction, moreRowAction] : [deleteRowAction];
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.reloadData()
-    }
-    
-    // MARK: TodoDelegate
-    
-    func addItem(item: TodoItem) {
-        model.append(item)
-        table.reloadData()
-    }
-}
-
-protocol TodoDelegate: class {
-    func addItem(item: TodoItem)
 }
