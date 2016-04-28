@@ -15,14 +15,14 @@ class TodoTableViewController: UITableViewController {
     var model: [TodoItem] = Array()
     var modelExpired: [TodoItem] = Array()
     
+    @IBOutlet weak var table: UITableView!
+    
     var dateFormatter: NSDateFormatter {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .ShortStyle
         formatter.timeStyle = .ShortStyle
         return formatter
     }
-    
-    @IBOutlet weak var table: UITableView!
     
     override func viewDidLoad() {
         table.rowHeight = UITableViewAutomaticDimension
@@ -31,9 +31,9 @@ class TodoTableViewController: UITableViewController {
         table.allowsSelectionDuringEditing = false
         table.allowsMultipleSelection = false
         
-        model.append(TodoItem(title: "Buy milk", dueDate: nil, color: UIColor.greenColor()))
-        model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), color: UIColor.yellowColor()))
-        model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), color: UIColor.blackColor()))
+        model.append(TodoItem(title: "Buy milk", dueDate: nil, color: UIColor(40, 209, 22, 100)))
+        model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), color: UIColor(40, 209, 22, 100)))
+        model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), color: UIColor(255, 157, 27, 100)))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -65,7 +65,7 @@ class TodoTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Active" : "Expired"
+        return section == 0 ? "Active" : "Done"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

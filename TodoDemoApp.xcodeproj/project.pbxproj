@@ -15,6 +15,7 @@
 		E64083D51CCF9B22006648B9 /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D41CCF9B22006648B9 /* TodoTableViewController.swift */; };
 		E64083D71CCF9D57006648B9 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */; };
 		E64083D91CD15EE5006648B9 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */; };
+		E64083DB1CD23A22006648B9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083DA1CD23A22006648B9 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		E64083D41CCF9B22006648B9 /* TodoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
+		E64083DA1CD23A22006648B9 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				E64083D21CCF9AEC006648B9 /* TodoItem.swift */,
 				E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */,
 				E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */,
+				E64083DA1CD23A22006648B9 /* Extension.swift */,
 			);
 			path = TodoDemoApp;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				E64083D31CCF9AEC006648B9 /* TodoItem.swift in Sources */,
 				E64083D91CD15EE5006648B9 /* AddTodoViewController.swift in Sources */,
 				E64083D51CCF9B22006648B9 /* TodoTableViewController.swift in Sources */,
+				E64083DB1CD23A22006648B9 /* Extension.swift in Sources */,
 				E64083B31CCF9A2B006648B9 /* AppDelegate.swift in Sources */,
 				E64083D71CCF9D57006648B9 /* TodoTableViewCell.swift in Sources */,
 			);
@@ -390,6 +394,7 @@
 				E64083CE1CCF9A2B006648B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E64083CF1CCF9A2B006648B9 /* Build configuration list for PBXNativeTarget "TodoDemoAppTests" */ = {
 			isa = XCConfigurationList;
@@ -398,6 +403,7 @@
 				E64083D11CCF9A2B006648B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

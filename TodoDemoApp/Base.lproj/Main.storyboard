@@ -12,13 +12,13 @@
         <scene sceneID="PUC-yZ-Cw0">
             <objects>
                 <tableViewController id="tyZ-BT-lJt" userLabel="Something Todo" customClass="TodoTableViewController" customModule="TodoDemoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Et8-b6-QiK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Et8-b6-QiK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" id="9Cg-Uh-h3c" customClass="TodoTableViewCell" customModule="TodoDemoApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Cg-Uh-h3c" id="4MP-Qa-GqK">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -104,17 +104,20 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="PXJ-eR-eqC">
-                                <rect key="frame" x="0.0" y="126" width="600" height="216"/>
+                                <rect key="frame" x="0.0" y="122" width="600" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="483482246.67079902">
                                     <!--2016-04-27 20:37:26 +0000-->
                                 </date>
                             </datePicker>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQA-Vg-SBq">
+                                <rect key="frame" x="150" y="338" width="300" height="216"/>
+                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zn-uP-NQ4">
-                                <rect key="frame" x="284.5" y="358" width="31" height="33"/>
+                                <rect key="frame" x="284.5" y="552" width="31" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="addItem:" destination="R5o-fv-av3" eventType="touchUpInside" id="JEv-jh-lNs"/>
+                                    <action selector="addItem:" destination="R5o-fv-av3" eventType="touchUpInside" id="dT9-3f-yst"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -122,15 +125,20 @@
                         <constraints>
                             <constraint firstItem="PXJ-eR-eqC" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="1zM-nl-ddo"/>
                             <constraint firstItem="5OS-zI-SMJ" firstAttribute="top" secondItem="IHF-9B-nfI" secondAttribute="bottom" constant="16" id="6Ur-id-LUS"/>
-                            <constraint firstItem="3zn-uP-NQ4" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="KVL-g2-Q2K"/>
+                            <constraint firstItem="gQA-Vg-SBq" firstAttribute="bottom" secondItem="3zn-uP-NQ4" secondAttribute="top" constant="2" id="DnF-pr-AEB"/>
+                            <constraint firstItem="3zn-uP-NQ4" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="JPg-gp-jtm"/>
+                            <constraint firstItem="gQA-Vg-SBq" firstAttribute="top" secondItem="PXJ-eR-eqC" secondAttribute="bottom" id="WGe-QT-jos"/>
+                            <constraint firstItem="gQA-Vg-SBq" firstAttribute="width" secondItem="t7F-gK-yem" secondAttribute="width" multiplier="0.5" id="ckR-Xq-d78"/>
                             <constraint firstItem="5OS-zI-SMJ" firstAttribute="width" secondItem="t7F-gK-yem" secondAttribute="width" multiplier="0.9" id="dz2-JH-Qwp"/>
-                            <constraint firstItem="3zn-uP-NQ4" firstAttribute="top" secondItem="PXJ-eR-eqC" secondAttribute="bottom" constant="16" id="fOF-fE-dj3"/>
                             <constraint firstItem="PXJ-eR-eqC" firstAttribute="width" secondItem="t7F-gK-yem" secondAttribute="width" id="imz-Zr-qMJ"/>
                             <constraint firstItem="5OS-zI-SMJ" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="tK5-GA-Hi5"/>
-                            <constraint firstItem="PXJ-eR-eqC" firstAttribute="top" secondItem="5OS-zI-SMJ" secondAttribute="bottom" constant="16" id="vld-Ma-mfz"/>
+                            <constraint firstItem="gQA-Vg-SBq" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="uXO-lH-xUu"/>
+                            <constraint firstItem="PXJ-eR-eqC" firstAttribute="top" secondItem="5OS-zI-SMJ" secondAttribute="bottom" constant="12" id="vld-Ma-mfz"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="3zn-uP-NQ4" id="JRe-CI-91f"/>
+                        <outlet property="colorPicker" destination="gQA-Vg-SBq" id="Tdq-yW-tUN"/>
                         <outlet property="datePicker" destination="PXJ-eR-eqC" id="1E2-eT-AEv"/>
                         <outlet property="textField" destination="5OS-zI-SMJ" id="uD2-l8-AxQ"/>
                     </connections>
