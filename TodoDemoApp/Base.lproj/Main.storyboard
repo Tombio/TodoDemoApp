@@ -31,13 +31,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NDf-0y-5eq" userLabel="due">
-                                            <rect key="frame" x="480" y="4" width="120" height="34.5"/>
+                                            <rect key="frame" x="480" y="4" width="120" height="35"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="410-n5-Xuz" userLabel="color">
-                                            <rect key="frame" x="8" y="8.5" width="26" height="26.5"/>
+                                            <rect key="frame" x="8" y="9" width="26" height="26"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="410-n5-Xuz" secondAttribute="height" multiplier="1:1" id="EJ8-Kg-o3t"/>
                                             </constraints>
@@ -112,21 +112,11 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQA-Vg-SBq">
                                 <rect key="frame" x="150" y="338" width="300" height="216"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zn-uP-NQ4">
-                                <rect key="frame" x="284.5" y="552" width="31" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Add"/>
-                                <connections>
-                                    <action selector="addItem:" destination="R5o-fv-av3" eventType="touchUpInside" id="dT9-3f-yst"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PXJ-eR-eqC" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="1zM-nl-ddo"/>
                             <constraint firstItem="5OS-zI-SMJ" firstAttribute="top" secondItem="IHF-9B-nfI" secondAttribute="bottom" constant="16" id="6Ur-id-LUS"/>
-                            <constraint firstItem="gQA-Vg-SBq" firstAttribute="bottom" secondItem="3zn-uP-NQ4" secondAttribute="top" constant="2" id="DnF-pr-AEB"/>
-                            <constraint firstItem="3zn-uP-NQ4" firstAttribute="centerX" secondItem="t7F-gK-yem" secondAttribute="centerX" id="JPg-gp-jtm"/>
                             <constraint firstItem="gQA-Vg-SBq" firstAttribute="top" secondItem="PXJ-eR-eqC" secondAttribute="bottom" id="WGe-QT-jos"/>
                             <constraint firstItem="gQA-Vg-SBq" firstAttribute="width" secondItem="t7F-gK-yem" secondAttribute="width" multiplier="0.5" id="ckR-Xq-d78"/>
                             <constraint firstItem="5OS-zI-SMJ" firstAttribute="width" secondItem="t7F-gK-yem" secondAttribute="width" multiplier="0.9" id="dz2-JH-Qwp"/>
@@ -136,8 +126,16 @@
                             <constraint firstItem="PXJ-eR-eqC" firstAttribute="top" secondItem="5OS-zI-SMJ" secondAttribute="bottom" constant="12" id="vld-Ma-mfz"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Add Item" id="TqR-BI-xhx" userLabel="Add Item">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="ghh-z4-NeA">
+                            <connections>
+                                <action selector="addItem:" destination="R5o-fv-av3" id="zJx-i0-A1n"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addButton" destination="3zn-uP-NQ4" id="JRe-CI-91f"/>
                         <outlet property="colorPicker" destination="gQA-Vg-SBq" id="Tdq-yW-tUN"/>
                         <outlet property="datePicker" destination="PXJ-eR-eqC" id="1E2-eT-AEv"/>
                         <outlet property="textField" destination="5OS-zI-SMJ" id="uD2-l8-AxQ"/>
