@@ -10,7 +10,17 @@ import Foundation
 import UIKit
 
 struct TodoItem {
+    
+    private static var idSequence: Int = 0
+    
+    let identifier = TodoItem.nextIdentifier()
     let title: String
     let dueDate: NSDate?
     let color: UIColor
+    var expired = false
+    
+    static func nextIdentifier() -> Int {
+        TodoItem.idSequence += 1
+        return idSequence
+    }
 }

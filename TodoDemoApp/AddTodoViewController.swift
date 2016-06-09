@@ -17,10 +17,11 @@ class AddTodoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     weak var delegate: TodoDelegate?
     
-    let pickerData = ["Green": UIColor(40, 209, 22, 100),
-                      "Blue": UIColor(27, 105, 164, 100),
-                      "Yellow": UIColor(255, 157, 27, 100),
-                      "Red": UIColor(251, 27, 38, 100)]
+    let pickerData = [
+        "Green": UIColor(40, 209, 22, 100),
+        "Blue": UIColor(27, 105, 164, 100),
+        "Yellow": UIColor(255, 157, 27, 100),
+        "Red": UIColor(251, 27, 38, 100)]
     
     
     override func viewDidAppear(animated: Bool) {
@@ -34,8 +35,8 @@ class AddTodoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if let text = self.textField.text {
             let index = pickerData.startIndex.advancedBy(colorPicker.selectedRowInComponent(0))
             let key = pickerData.keys[index]
-            let color = pickerData[key]
-            delegate?.addItem(TodoItem(title: text, dueDate: datePicker.date, color: color!))
+            let color = pickerData[key]!
+            delegate?.addItem(TodoItem(title: text, dueDate: datePicker.date, color: color, expired: false))
             navigationController?.popViewControllerAnimated(true)
         }
     }

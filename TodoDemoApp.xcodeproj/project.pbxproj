@@ -16,6 +16,7 @@
 		E64083D71CCF9D57006648B9 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */; };
 		E64083D91CD15EE5006648B9 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */; };
 		E64083DB1CD23A22006648B9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083DA1CD23A22006648B9 /* Extension.swift */; };
+		E6BFC0F51CD4BC7400F5B818 /* ModelSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BFC0F41CD4BC7400F5B818 /* ModelSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		E64083DA1CD23A22006648B9 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		E6BFC0F41CD4BC7400F5B818 /* ModelSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */,
 				E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */,
 				E64083DA1CD23A22006648B9 /* Extension.swift */,
+				E6BFC0F41CD4BC7400F5B818 /* ModelSection.swift */,
 			);
 			path = TodoDemoApp;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				E64083D51CCF9B22006648B9 /* TodoTableViewController.swift in Sources */,
 				E64083DB1CD23A22006648B9 /* Extension.swift in Sources */,
 				E64083B31CCF9A2B006648B9 /* AppDelegate.swift in Sources */,
+				E6BFC0F51CD4BC7400F5B818 /* ModelSection.swift in Sources */,
 				E64083D71CCF9D57006648B9 /* TodoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
