@@ -11,8 +11,13 @@ import UIKit
 
 class TodoTableViewController: UITableViewController, TodoDelegate {
     
+    enum Section: Int {
+        case Due = 0
+        case Expired
+    }
+    
     let cellId = "TodoCell"
-    var model: [ModelSection] = Array()
+    var model: [TodoItem] = Array()
     
     @IBOutlet weak var table: UITableView!
     
@@ -30,9 +35,10 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         table.allowsSelectionDuringEditing = false
         table.allowsSelection = false
         table.allowsMultipleSelection = false
-        
-        model.append(ModelSection(name: SectionLabel.Active , items: []))
-        model.append(ModelSection(name: SectionLabel.Done , items: []))
+       
+        model.append(TodoItem(title: "Buy milk", dueDate: nil, priority: .Normal, expired: false))
+        model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), priority: .Low, expired: false))
+        model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), priority: .High, expired: false))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -40,12 +46,13 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         table.reloadData()
     }
     
-    func expireRow(indexPath: NSIndexPath) {
-        model[indexPath.section].items[indexPath.row].expired = true
+    func expireRow(row: Int) {
+        model[row].expired = true
     }
     
-    func deleteRow(indexPath: NSIndexPath) {
-        model[indexPath.section].items.removeAtIndex(indexPath.row)
+    func deleteRow(row: Int, section: Int) {
+        let id = model.filterByExpirationStatus(section == 1)[row].identifier
+        model.removeById(id)
     }
     
     // MARK: - UITableViewDataSource
@@ -63,19 +70,18 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model[section].items.count
+        return model.filterByExpirationStatus(section == 1).count
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Active" : "Done"
+        return section == 0 ? "Active" : "Expired"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! TodoTableViewCell
         let index = indexPath.row
         let section = indexPath.section
-        
-        let item = model[section].items[index]
+        let item = model.filterByExpirationStatus(section == 1)[index]
         cell.titleLabel.text = item.title
         if let date = item.dueDate {
             cell.dueLabel.text = dateFormatter.stringFromDate(date)
@@ -83,21 +89,20 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         else {
             cell.dueLabel.text = ""
         }
-        cell.colorLabel.backgroundColor = item.color
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done", handler:{action, indexpath in
-            self.expireRow(indexPath)
+            self.expireRow(indexPath.row)
             self.table.editing = false
             self.table.reloadData()
         });
         moreRowAction.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.3922, alpha: 1.0);
         
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            self.deleteRow(indexPath)
+            self.deleteRow(indexPath.row, section: indexPath.section)
             self.table.editing = false
             self.table.reloadData()
         });
@@ -108,7 +113,7 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
     // MARK: - TodoDelegate
     
     func addItem(item: TodoItem){
-        model[0].items.append(item)
+        model.append(item)
         table.reloadData()
     }
     
