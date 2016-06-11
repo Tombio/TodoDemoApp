@@ -11,10 +11,19 @@ import UIKit
 
 struct TodoItem: ItemProtocol {
     
-    enum Priority {
-        case High
-        case Normal
-        case Low
+    enum Priority: Int {
+        case High = 0, Normal, Low
+        
+        var humanReadable: String {
+            switch self {
+            case High:
+                return "!!!"
+            case Normal:
+                return "!!"
+            case Low:
+                return "!"
+            }
+        }
     }
     
     private static var idSequence: Int = 0
@@ -34,4 +43,5 @@ struct TodoItem: ItemProtocol {
 protocol ItemProtocol {
     var identifier: Int { get }
     var expired: Bool { get set }
+    var dueDate: NSDate? { get }
 }

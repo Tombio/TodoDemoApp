@@ -9,17 +9,46 @@
 import Foundation
 import UIKit
 
-class TodoTableViewController: UITableViewController, TodoDelegate {
+class TodoTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TodoDelegate {
     
     enum Section: Int {
-        case Due = 0
-        case Expired
+        case Due = 0, Expired
+    }
+    
+    enum SortKey: Int {
+        case Date = 0, Priority
+    }
+    
+
+    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var sortOrderControl: UISegmentedControl!
+    
+    @IBAction func sort(sender: UISegmentedControl) {
+        if let sortKey = SortKey.init(rawValue: sender.selectedSegmentIndex) {
+            self.currentSort = sortKey
+        }
+        sort()
+    }
+    
+    func sort(){
+        if currentSort == .Date {
+            model.sortInPlace( {
+                let first = $0.dueDate ?? NSDate.distantFuture()
+                let second = $1.dueDate ?? NSDate.distantFuture()
+                return first.compare(second) == .OrderedAscending
+            })
+        }
+        else if currentSort == .Priority {
+            model.sortInPlace( {
+                return $0.priority.rawValue < $1.priority.rawValue
+            })
+        }
+        
+        table.reloadData()
     }
     
     let cellId = "TodoCell"
     var model: [TodoItem] = Array()
-    
-    @IBOutlet weak var table: UITableView!
     
     var dateFormatter: NSDateFormatter {
         let formatter = NSDateFormatter()
@@ -27,6 +56,8 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         formatter.timeStyle = .ShortStyle
         return formatter
     }
+    
+    var currentSort = SortKey.Date
     
     override func viewDidLoad() {
         table.rowHeight = UITableViewAutomaticDimension
@@ -39,6 +70,8 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         model.append(TodoItem(title: "Buy milk", dueDate: nil, priority: .Normal, expired: false))
         model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), priority: .Low, expired: false))
         model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), priority: .High, expired: false))
+        
+        sort() // Sort initally by deafult
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -46,38 +79,41 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         table.reloadData()
     }
     
-    func expireRow(row: Int) {
-        model[row].expired = true
+    func expireRow(row: Int, section: Int) {
+        let elements = model.filterByExpirationStatus(section == 1)
+        if let modelIndex = model.indexOf(elements[row]){
+            model[modelIndex].expired = true
+        }
     }
     
     func deleteRow(row: Int, section: Int) {
-        let id = model.filterByExpirationStatus(section == 1)[row].identifier
-        model.removeById(id)
+        let id = model.filterByExpirationStatus(section == 1)[row]
+        model.removeElement(id)
     }
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         table.reloadData()
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.filterByExpirationStatus(section == 1).count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? "Active" : "Expired"
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! TodoTableViewCell
         let index = indexPath.row
         let section = indexPath.section
@@ -89,13 +125,14 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
         else {
             cell.dueLabel.text = ""
         }
+        
+        cell.priorityLabel.text = item.priority.humanReadable
         return cell
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done", handler:{action, indexpath in
-            self.expireRow(indexPath.row)
+            self.expireRow(indexPath.row, section: indexPath.section)
             self.table.editing = false
             self.table.reloadData()
         });
@@ -114,6 +151,7 @@ class TodoTableViewController: UITableViewController, TodoDelegate {
     
     func addItem(item: TodoItem){
         model.append(item)
+        sort()
         table.reloadData()
     }
     

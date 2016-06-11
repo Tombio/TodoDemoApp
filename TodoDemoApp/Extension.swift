@@ -21,16 +21,13 @@ extension Array where Element : ItemProtocol {
         return self.filter({ $0.expired == expired })
     }
     
-    mutating func removeById(id: Int) {
-        self = self.filter({ $0.id != id })
-    }
-}
-
-extension Int {
-    
-    mutating func next() -> Int {
-        self += 1
-        return self
+    mutating func removeElement(element: Element) {
+        if let index = indexOf(element) {
+            removeAtIndex(index)
+        }
     }
     
+    func indexOf(element: Element) -> Int? {
+        return self.indexOf({ $0.identifier == element.identifier})
+    }
 }

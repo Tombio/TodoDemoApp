@@ -11,7 +11,7 @@ import UIKit
 
 class TodoTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var priorityLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dueLabel: UILabel!
     
