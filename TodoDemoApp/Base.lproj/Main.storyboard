@@ -67,6 +67,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="datePicker" destination="PXJ-eR-eqC" id="1E2-eT-AEv"/>
+                        <outlet property="prioritySelector" destination="YZZ-EP-Nad" id="ebO-Qi-snM"/>
                         <outlet property="textField" destination="5OS-zI-SMJ" id="uD2-l8-AxQ"/>
                     </connections>
                 </viewController>
