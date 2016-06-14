@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class TodoTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TodoDelegate {
-    
+
     enum Section: Int {
         case Due = 0, Expired
     }
@@ -22,12 +22,62 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sortOrderControl: UISegmentedControl!
-    
     @IBAction func sort(sender: UISegmentedControl) {
         if let sortKey = SortKey.init(rawValue: sender.selectedSegmentIndex) {
             self.currentSort = sortKey
         }
         sort()
+    }
+    
+    let cellId = "TodoCell"
+    var model: [TodoItem] = Array()
+    let persistence = Persistence()
+    
+    var dateFormatter: NSDateFormatter {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .ShortStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter
+    }
+    
+    var currentSort = SortKey.Date
+    
+    override func viewDidLoad() {
+        table.rowHeight = UITableViewAutomaticDimension
+        table.dataSource = self
+        table.delegate = self
+        
+        // Set selection modes
+        table.allowsSelectionDuringEditing = false
+        table.allowsSelection = false
+        table.allowsMultipleSelection = false
+       
+        // Populate demo data
+        // model.append(TodoItem(title: "Buy milk", dueDate: nil, priority: .Normal, expired: false))
+        // model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), priority: .Low, expired: false))
+        // model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), priority: .High, expired: false))
+        
+        model = persistence.load()
+        sort() // Sort initally by default key
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        table.reloadData()
+    }
+    
+    func expireRow(row: Int, section: Int) {
+        let elements = model.filterByExpirationStatus(section == 1)
+        if let modelIndex = model.indexOf(elements[row]){
+            model[modelIndex].expired = true
+        }
+        persistence.persist(model)
+    }
+    
+    func deleteRow(row: Int, section: Int) {
+        let id = model.filterByExpirationStatus(section == 1)[row]
+        model.removeElement(id)
+        persistence.persist(model)
     }
     
     func sort(){
@@ -45,50 +95,6 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         table.reloadData()
-    }
-    
-    let cellId = "TodoCell"
-    var model: [TodoItem] = Array()
-    
-    var dateFormatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .ShortStyle
-        formatter.timeStyle = .ShortStyle
-        return formatter
-    }
-    
-    var currentSort = SortKey.Date
-    
-    override func viewDidLoad() {
-        table.rowHeight = UITableViewAutomaticDimension
-        table.dataSource = self
-        table.delegate = self
-        table.allowsSelectionDuringEditing = false
-        table.allowsSelection = false
-        table.allowsMultipleSelection = false
-       
-        model.append(TodoItem(title: "Buy milk", dueDate: nil, priority: .Normal, expired: false))
-        model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), priority: .Low, expired: false))
-        model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), priority: .High, expired: false))
-        
-        sort() // Sort initally by deafult
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        table.reloadData()
-    }
-    
-    func expireRow(row: Int, section: Int) {
-        let elements = model.filterByExpirationStatus(section == 1)
-        if let modelIndex = model.indexOf(elements[row]){
-            model[modelIndex].expired = true
-        }
-    }
-    
-    func deleteRow(row: Int, section: Int) {
-        let id = model.filterByExpirationStatus(section == 1)[row]
-        model.removeElement(id)
     }
     
     // MARK: - UITableViewDataSource
@@ -152,6 +158,7 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func addItem(item: TodoItem){
         model.append(item)
         sort()
+        persistence.persist(model)
         table.reloadData()
     }
     

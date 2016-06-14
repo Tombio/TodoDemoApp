@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56D829F21D1097ED00B03089 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D829F11D1097ED00B03089 /* Persistence.swift */; };
 		E64083B31CCF9A2B006648B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083B21CCF9A2B006648B9 /* AppDelegate.swift */; };
 		E64083B81CCF9A2B006648B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64083B61CCF9A2B006648B9 /* Main.storyboard */; };
 		E64083BA1CCF9A2B006648B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64083B91CCF9A2B006648B9 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		56D829F11D1097ED00B03089 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E64083AF1CCF9A2B006648B9 /* TodoDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64083B21CCF9A2B006648B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E64083B71CCF9A2B006648B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */,
 				E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */,
 				E64083DA1CD23A22006648B9 /* Extension.swift */,
+				56D829F11D1097ED00B03089 /* Persistence.swift */,
 			);
 			path = TodoDemoApp;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				E64083D31CCF9AEC006648B9 /* TodoItem.swift in Sources */,
 				E64083D91CD15EE5006648B9 /* AddTodoViewController.swift in Sources */,
 				E64083D51CCF9B22006648B9 /* TodoTableViewController.swift in Sources */,
+				56D829F21D1097ED00B03089 /* Persistence.swift in Sources */,
 				E64083DB1CD23A22006648B9 /* Extension.swift in Sources */,
 				E64083B31CCF9A2B006648B9 /* AppDelegate.swift in Sources */,
 				E64083D71CCF9D57006648B9 /* TodoTableViewCell.swift in Sources */,

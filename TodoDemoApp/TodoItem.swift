@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct TodoItem: ItemProtocol {
+class TodoItem: NSObject, NSCoding, ItemProtocol {
     
     enum Priority: Int {
         case High = 0, Normal, Low
@@ -27,17 +27,45 @@ struct TodoItem: ItemProtocol {
     }
     
     private static var idSequence: Int = 0
+    let identifier: Int
+    let title: String
+    let dueDate: NSDate?
+    let priority: Priority
+    var expired: Bool
     
     static func nextIdentifier() -> Int {
         TodoItem.idSequence += 1
         return idSequence
     }
     
-    let identifier = TodoItem.nextIdentifier()
-    let title: String
-    let dueDate: NSDate?
-    let priority: Priority
-    var expired: Bool
+    required init(title: String, dueDate: NSDate?, priority: Priority, expired: Bool) {
+        self.identifier = TodoItem.nextIdentifier()
+        self.title = title
+        self.dueDate = dueDate
+        self.priority = priority
+        self.expired = expired
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        identifier = aDecoder.decodeObjectForKey("identifier") as! Int
+        title = aDecoder.decodeObjectForKey("title") as! String
+        dueDate = aDecoder.decodeObjectForKey("dueDate") as? NSDate
+        priority = Priority.init(rawValue: aDecoder.decodeObjectForKey("priority") as! Int)!
+        expired = aDecoder.decodeObjectForKey("expired") as! Bool
+        
+        // Make sure id sequence value is high enough to prevent clashes
+        TodoItem.idSequence = max(TodoItem.idSequence, identifier)
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(identifier, forKey: "identifier")
+        aCoder.encodeObject(title, forKey: "title")
+        aCoder.encodeObject(dueDate, forKey: "dueDate")
+        aCoder.encodeObject(priority.rawValue, forKey: "priority")
+        aCoder.encodeObject(expired, forKey: "expired")
+    }
+    
 }
 
 protocol ItemProtocol {
