@@ -47,18 +47,12 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
         table.dataSource = self
         table.delegate = self
         
-        // Set selection modes
         table.allowsSelectionDuringEditing = false
         table.allowsSelection = false
         table.allowsMultipleSelection = false
        
-        // Populate demo data
-        // model.append(TodoItem(title: "Buy milk", dueDate: nil, priority: .Normal, expired: false))
-        // model.append(TodoItem(title: "Eat your vegetables", dueDate: NSDate(), priority: .Low, expired: false))
-        // model.append(TodoItem(title: "Fix this app", dueDate: NSDate(), priority: .High, expired: false))
-        
         model = persistence.load()
-        sort() // Sort initally by default key
+        sort()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -93,9 +87,10 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 return $0.priority.rawValue < $1.priority.rawValue
             })
         }
-        
         table.reloadData()
     }
+    
+    
     
     // MARK: - UITableViewDataSource
     
@@ -153,13 +148,14 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
         return indexPath.section == 0 ? [deleteRowAction, moreRowAction] : [deleteRowAction];
     }
     
+    
+    
     // MARK: - TodoDelegate
     
     func addItem(item: TodoItem){
         model.append(item)
-        sort()
         persistence.persist(model)
-        table.reloadData()
+        sort()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

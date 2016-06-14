@@ -12,6 +12,7 @@ import UIKit
 class TodoItem: NSObject, NSCoding, ItemProtocol {
     
     enum Priority: Int {
+        
         case High = 0, Normal, Low
         
         var humanReadable: String {
