@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		56D829F21D1097ED00B03089 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D829F11D1097ED00B03089 /* Persistence.swift */; };
+		56D829F61D11776600B03089 /* TodoTableViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D829F51D11776600B03089 /* TodoTableViewControllerTest.swift */; };
+		56D829F81D1178FA00B03089 /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D41CCF9B22006648B9 /* TodoTableViewController.swift */; };
+		56D829F91D11795100B03089 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083B21CCF9A2B006648B9 /* AppDelegate.swift */; };
+		56D829FA1D11795600B03089 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D21CCF9AEC006648B9 /* TodoItem.swift */; };
+		56D829FB1D11795600B03089 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */; };
+		56D829FC1D11795600B03089 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */; };
+		56D82A001D11DD5B00B03089 /* PersistenceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D829FF1D11DD5B00B03089 /* PersistenceMock.swift */; };
+		56D82A011D11F1F500B03089 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D829F11D1097ED00B03089 /* Persistence.swift */; };
+		56D82A021D11F25700B03089 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083DA1CD23A22006648B9 /* Extension.swift */; };
 		E64083B31CCF9A2B006648B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64083B21CCF9A2B006648B9 /* AppDelegate.swift */; };
 		E64083B81CCF9A2B006648B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64083B61CCF9A2B006648B9 /* Main.storyboard */; };
 		E64083BA1CCF9A2B006648B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64083B91CCF9A2B006648B9 /* Assets.xcassets */; };
@@ -31,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		56D829F11D1097ED00B03089 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		56D829F51D11776600B03089 /* TodoTableViewControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewControllerTest.swift; sourceTree = "<group>"; };
+		56D829FF1D11DD5B00B03089 /* PersistenceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceMock.swift; sourceTree = "<group>"; };
 		E64083AF1CCF9A2B006648B9 /* TodoDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64083B21CCF9A2B006648B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E64083B71CCF9A2B006648B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,6 +96,7 @@
 		E64083B11CCF9A2B006648B9 /* TodoDemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				E64083DA1CD23A22006648B9 /* Extension.swift */,
 				E64083B21CCF9A2B006648B9 /* AppDelegate.swift */,
 				E64083D41CCF9B22006648B9 /* TodoTableViewController.swift */,
 				E64083B61CCF9A2B006648B9 /* Main.storyboard */,
@@ -93,7 +105,6 @@
 				E64083D21CCF9AEC006648B9 /* TodoItem.swift */,
 				E64083D61CCF9D57006648B9 /* TodoTableViewCell.swift */,
 				E64083D81CD15EE5006648B9 /* AddTodoViewController.swift */,
-				E64083DA1CD23A22006648B9 /* Extension.swift */,
 				56D829F11D1097ED00B03089 /* Persistence.swift */,
 			);
 			path = TodoDemoApp;
@@ -104,6 +115,8 @@
 			children = (
 				E64083C71CCF9A2B006648B9 /* TodoDemoAppTests.swift */,
 				E64083C91CCF9A2B006648B9 /* Info.plist */,
+				56D829F51D11776600B03089 /* TodoTableViewControllerTest.swift */,
+				56D829FF1D11DD5B00B03089 /* PersistenceMock.swift */,
 			);
 			path = TodoDemoAppTests;
 			sourceTree = "<group>";
@@ -222,7 +235,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56D82A011D11F1F500B03089 /* Persistence.swift in Sources */,
+				56D829FA1D11795600B03089 /* TodoItem.swift in Sources */,
+				56D829FC1D11795600B03089 /* AddTodoViewController.swift in Sources */,
+				56D829F91D11795100B03089 /* AppDelegate.swift in Sources */,
 				E64083C81CCF9A2B006648B9 /* TodoDemoAppTests.swift in Sources */,
+				56D82A021D11F25700B03089 /* Extension.swift in Sources */,
+				56D82A001D11DD5B00B03089 /* PersistenceMock.swift in Sources */,
+				56D829FB1D11795600B03089 /* TodoTableViewCell.swift in Sources */,
+				56D829F81D1178FA00B03089 /* TodoTableViewController.swift in Sources */,
+				56D829F61D11776600B03089 /* TodoTableViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

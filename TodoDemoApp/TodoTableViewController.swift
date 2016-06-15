@@ -15,13 +15,15 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
         case Due = 0, Expired
     }
     
+    // Raw values are bound to UISegmentedController's segment indices, so keep them in order
+    // and synchronized
     enum SortKey: Int {
         case Date = 0, Priority
     }
     
-
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sortOrderControl: UISegmentedControl!
+    
     @IBAction func sort(sender: UISegmentedControl) {
         if let sortKey = SortKey.init(rawValue: sender.selectedSegmentIndex) {
             self.currentSort = sortKey
@@ -31,7 +33,8 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let cellId = "TodoCell"
     var model: [TodoItem] = Array()
-    let persistence = Persistence()
+    var persistence = Persistence()
+    var currentSort = SortKey.Date
     
     var dateFormatter: NSDateFormatter {
         let formatter = NSDateFormatter()
@@ -39,8 +42,6 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
         formatter.timeStyle = .ShortStyle
         return formatter
     }
-    
-    var currentSort = SortKey.Date
     
     override func viewDidLoad() {
         table.rowHeight = UITableViewAutomaticDimension
@@ -84,10 +85,14 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else if currentSort == .Priority {
             model.sortInPlace( {
-                return $0.priority.rawValue < $1.priority.rawValue
+                if $0.priority.rawValue != $1.priority.rawValue {
+                    return $0.priority.rawValue < $1.priority.rawValue
+                }
+                else {
+                    return $0.title.compare($1.title) == .OrderedAscending
+                }
             })
         }
-        table.reloadData()
     }
     
     
@@ -132,16 +137,18 @@ class TodoTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done", handler:{action, indexpath in
+        let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done", handler:{ action, indexpath in
             self.expireRow(indexPath.row, section: indexPath.section)
             self.table.editing = false
+            self.sort()
             self.table.reloadData()
         });
         moreRowAction.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.3922, alpha: 1.0);
         
-        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{ action, indexpath in
             self.deleteRow(indexPath.row, section: indexPath.section)
             self.table.editing = false
+            self.sort()
             self.table.reloadData()
         });
         

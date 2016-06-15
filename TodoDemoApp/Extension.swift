@@ -18,7 +18,9 @@ extension UIColor {
 extension Array where Element : ItemProtocol {
     
     func filterByExpirationStatus(expired: Bool) -> [Element] {
-        return self.filter({ $0.expired == expired })
+        return self.filter({ item in
+            item.expired == expired
+        })
     }
     
     mutating func removeElement(element: Element) {
@@ -29,5 +31,16 @@ extension Array where Element : ItemProtocol {
     
     func indexOf(element: Element) -> Int? {
         return self.indexOf({ $0.identifier == element.identifier})
+    }
+    
+    mutating func shuffleInPlace() {
+        let c = self.count
+        for i in 0..<(c - 1) {
+            let j = Int(arc4random_uniform(UInt32(c - i))) + i
+            if j == i {
+                continue
+            }
+            swap(&self[i], &self[j])
+        }
     }
 }

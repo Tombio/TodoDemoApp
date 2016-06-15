@@ -66,7 +66,6 @@ class TodoItem: NSObject, NSCoding, ItemProtocol {
         aCoder.encodeObject(priority.rawValue, forKey: "priority")
         aCoder.encodeObject(expired, forKey: "expired")
     }
-    
 }
 
 protocol ItemProtocol {

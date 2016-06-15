@@ -11,9 +11,13 @@ import XCTest
 
 class TodoDemoAppTests: XCTestCase {
     
+    let tableView = TodoTableViewController()
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        tableView.model.append(TodoItem(title: "Foobar Low", dueDate: NSDate(), priority: TodoItem.Priority.Low, expired: false))
+        tableView.model.append(TodoItem(title: "Foobar High", dueDate: NSDate().dateByAddingTimeInterval(10), priority: TodoItem.Priority.High, expired: false))
+
     }
     
     override func tearDown() {
@@ -21,9 +25,10 @@ class TodoDemoAppTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSort() {
+        tableView.sort()
+        assert(tableView.model.count == 2)
+        assert(tableView.model[0].expired == false)
     }
     
     func testPerformanceExample() {
