@@ -14,15 +14,18 @@ class AddTodoViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var prioritySelector: UISegmentedControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     weak var delegate: TodoDelegate?
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        textField.addTarget(self, action: #selector(validateTextField), forControlEvents: UIControlEvents.EditingChanged)
     }
     
     @IBAction func addItem(sender: AnyObject) {
-        if let text = self.textField.text {
+        if let text = textField.text?.trim() {
             delegate?.addItem(TodoItem(title: text, dueDate: datePicker.date, priority: self.priority, expired: false))
             navigationController?.popViewControllerAnimated(true)
         }
@@ -39,5 +42,11 @@ class AddTodoViewController: UIViewController {
         default:
             return TodoItem.Priority.Normal
         }
+    }
+    
+    // Mark: -- TextField Validation
+    
+    func validateTextField() {
+        saveButton.enabled = !textField.text!.trim().isEmpty
     }
 }

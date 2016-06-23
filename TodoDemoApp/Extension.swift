@@ -44,3 +44,14 @@ extension Array where Element : ItemProtocol {
         }
     }
 }
+
+extension String {
+    
+    func trim() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+    
+    func deleteString() -> String {
+        return self.characters.map { _ in "\u{8}" }.joinWithSeparator("")
+    }
+}

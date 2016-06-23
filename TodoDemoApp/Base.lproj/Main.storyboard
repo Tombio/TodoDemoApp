@@ -58,7 +58,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Add Item" id="TqR-BI-xhx" userLabel="Add Item">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="ghh-z4-NeA">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="ghh-z4-NeA">
                             <connections>
                                 <action selector="addItem:" destination="R5o-fv-av3" id="zJx-i0-A1n"/>
                             </connections>
@@ -68,6 +68,7 @@
                     <connections>
                         <outlet property="datePicker" destination="PXJ-eR-eqC" id="1E2-eT-AEv"/>
                         <outlet property="prioritySelector" destination="YZZ-EP-Nad" id="ebO-Qi-snM"/>
+                        <outlet property="saveButton" destination="ghh-z4-NeA" id="hjL-HF-Pai"/>
                         <outlet property="textField" destination="5OS-zI-SMJ" id="uD2-l8-AxQ"/>
                     </connections>
                 </viewController>

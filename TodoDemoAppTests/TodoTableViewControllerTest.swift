@@ -12,6 +12,7 @@ import XCTest
 class TodoTableViewControllerTest: XCTestCase {
 
     let tableView = TodoTableViewController()
+    let persistenceMock = PersistenceMock()
     
     let item1 = TodoItem(title: "First", dueDate: NSDate(), priority: TodoItem.Priority.Low, expired: false)
     let item2 = TodoItem(title: "Second", dueDate: NSDate().dateByAddingTimeInterval(10), priority: TodoItem.Priority.High, expired: false)
@@ -21,7 +22,7 @@ class TodoTableViewControllerTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        tableView.persistence = PersistenceMock()
+        tableView.persistence = persistenceMock
         tableView.model.append(item1)
         tableView.model.append(item2)
         tableView.model.append(item3)
@@ -41,7 +42,7 @@ class TodoTableViewControllerTest: XCTestCase {
         for _ in 0.stride(to: 1000, by: 1){
             tableView.model.shuffleInPlace()
             tableView.sort()
-            XCTAssertTrue(tableView.model.count == 5, "Model contains incorrect amount of rows")
+            XCTAssertTrue(tableView.model.count == 5, "Model contains correct amount of rows")
             XCTAssertTrue(tableView.model[0] == item5)
             XCTAssertTrue(tableView.model[1] == item3)
             XCTAssertTrue(tableView.model[2] == item1)
@@ -55,7 +56,7 @@ class TodoTableViewControllerTest: XCTestCase {
         for _ in 0.stride(to: 1000, by: 1){
             tableView.model.shuffleInPlace()
             tableView.sort()
-            XCTAssertTrue(tableView.model.count == 5, "Model contains incorrect amount of rows")
+            XCTAssertTrue(tableView.model.count == 5, "Model contains correct amount of rows")
             XCTAssertTrue(tableView.model[0] == item2)
             XCTAssertTrue(tableView.model[1] == item5)
             XCTAssertTrue(tableView.model[2] == item3)
@@ -77,6 +78,20 @@ class TodoTableViewControllerTest: XCTestCase {
         XCTAssertEqual(items.count, 2)
         XCTAssertTrue(items.contains(item3))
         XCTAssertTrue(items.contains(item5))
+    }
+    
+    func testDeleteRow() {
+        tableView.sort()
+        tableView.deleteRow(0, section: 0)
+        XCTAssertTrue(tableView.model.count == 4, "Model contains correct number of rows")
+        XCTAssertTrue(persistenceMock.persistCount == 1, "Persisting of items called after delete")
+    }
+    
+    func testExpireRow() {
+        tableView.sort()
+        tableView.expireRow(0, section: 0)
+        XCTAssertTrue(tableView.model.count == 5, "Model contains correct number of rows")
+        XCTAssertTrue(persistenceMock.persistCount == 1, "Persisting of items called after delete")
     }
     
     func testPerformanceExample() {
